@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Nachher-Umfrage – Flow & Wohlbefinden{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="card p-4 p-md-5 shadow-lg text-light">
+        <h1 class="h4 text-info mb-3 fw-bold text-center">
+          Teil C – Nachher-Umfrage (Flow & Wohlbefinden)
+        </h1>
+
+        {% if participant_id %}
+        <p class="text-muted small mb-3 text-center">
+          Teilnehmer-ID: <code>{{ participant_id }}</code>
+        </p>
+        {% endif %}
+
+        <p class="text-light">
+          Bitte beantworte die folgenden Aussagen bezogen auf die Aktivität, die du gerade gemacht hast.
+          Skala: <strong>1 = trifft gar nicht zu</strong> bis <strong>7 = trifft voll zu</strong>.
+        </p>
+
+        <form method="post" action="/post">
+          <div class="list-group mb-4">
+            {% for i, text in [
+              (1, "Ich war völlig konzentriert bei der Sache."),
+              (2, "Ich wusste genau, was ich als Nächstes tun musste."),
+              (3, "Ich hatte das Gefühl, die Kontrolle zu behalten."),
+              (4, "Die Aufgabe hat mich gefordert, aber war machbar."),
+              (5, "Ich habe das Zeitgefühl verloren."),
+              (6, "Ich habe mich von der Aktivität mitreißen lassen."),
+              (7, "Ich hatte Spaß und war motiviert weiterzumachen.")
+            ] %}
+            <div class="list-group-item bg-transparent text-light border-secondary py-3">
+              <label class="form-label mb-1">{{ i }}. {{ text }}</label>
+              <select name="flow{{i}}" class="form-select form-select-lg bg-dark text-light border-secondary" required>
+                <option value="" disabled selected>Bitte wählen …</option>
+                {% for n in range(1,8) %}
+                <option value="{{ n }}">{{ n }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            {% endfor %}
+          </div>
+
+          <hr class="border-secondary my-4">
+
+          <p class="text-light">
+            Jetzt noch einmal: Wie fühlst du dich <strong>im Moment</strong>?
+          </p>
+
+          <div class="list-group mb-4">
+            {% for i, text in [
+              (1, "Ich habe gute Laune und bin fröhlich."),
+              (2, "Ich bin entspannt und ruhig."),
+              (3, "Ich habe Energie und bin wach."),
+              (4, "Ich fühle mich erholt."),
+              (5, "Ich mache Dinge, die mich interessieren oder Spaß machen.")
+            ] %}
+            <div class="list-group-item bg-transparent text-light border-secondary py-3">
+              <label class="form-label mb-1">{{ i }}. {{ text }}</label>
+              <select name="who{{i}}" class="form-select form-select-lg bg-dark text-light border-secondary" required>
+                <option value="" disabled selected>Bitte wählen …</option>
+                {% for n in range(1,6) %}
+                <option value="{{ n }}">{{ n }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label">Positiv (0–10)</label>
+              <input type="number" class="form-control form-control-lg bg-dark text-light border-secondary"
+                     name="positive" min="0" max="10" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Gestresst/negativ (0–10)</label>
+              <input type="number" class="form-control form-control-lg bg-dark text-light border-secondary"
+                     name="stressed" min="0" max="10" required>
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">Absenden</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: #0b0c10;
+  color: #e6e6e6;
+}
+
+.card {
+  background-color: #111318;
+  border: 1px solid #1f2430;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary {
+  background-color: #00bfa6;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #00a891;
+}
+
+.text-info {
+  color: #00bfa6 !important;
+}
+.card {
+  background-color: #16191f;
+  border: 1px solid #2a2f3a;
+}
+
+body {
+  background-color: #0e1117;
+  color: #e8e8e8;
+}
+
+p, li, label {
+  color: #dcdcdc;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+@media (max-width: 576px) {
+  .card {
+    padding: 1.5rem !important;
+  }
+  p, li, label {
+    font-size: 1rem;
+  }
+}
+

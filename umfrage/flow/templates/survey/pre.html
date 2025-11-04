@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Pre-Survey – Wohlbefinden heute{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="card p-4 p-md-5 shadow-lg text-light">
+        <h1 class="h4 text-info mb-3 fw-bold text-center">
+          Teil A – Wohlbefinden heute (WHO-5)
+        </h1>
+        {% if participant_id %}
+        <p class="text-muted">Teilnehmer-ID: <code>{{ participant_id }}</code></p>
+        {% endif %}
+
+        <p class="text-light">
+          Bitte beantworte die folgenden Aussagen bezogen auf <strong>heute bis jetzt</strong>.
+          Skala: <strong>1 = trifft gar nicht zu</strong> bis <strong>5 = trifft voll zu</strong>.
+        </p>
+
+        <form method="post" action="/pre">
+          <!-- WHO-5 als Dropdown (1–5) -->
+          <div class="list-group mb-4">
+            {% for i, text in [
+              (1, "Ich habe heute gute Laune und bin fröhlich."),
+              (2, "Ich fühle mich ruhig und entspannt."),
+              (3, "Ich fühle mich aktiv und voller Energie."),
+              (4, "Ich fühle mich erholt."),
+              (5, "Ich mache heute Dinge, die mich interessieren.")
+            ] %}
+            <div class="list-group-item bg-transparent text-light border-secondary py-3">
+              <label class="form-label mb-1">{{ i }}. {{ text }}</label>
+              <select name="who{{i}}" class="form-select form-select-lg bg-dark text-light border-secondary" required>
+                <option value="" selected disabled>Bitte wählen …</option>
+                <option value="1">1 – trifft gar nicht zu</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 – trifft voll zu</option>
+              </select>
+            </div>
+            {% endfor %}
+          </div>
+
+          <hr class="border-secondary">
+
+          <p class="text-light">Wie fühlst du dich im Moment?</p>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label">Positiv (0–10)</label>
+              <input type="number" class="form-control form-control-lg bg-dark text-light border-secondary"
+                     name="positive" min="0" max="10" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Gestresst/negativ (0–10)</label>
+              <input type="number" class="form-control form-control-lg bg-dark text-light border-secondary"
+                     name="stressed" min="0" max="10" required>
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">
+              Weiter zur Flow-Aktivität
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

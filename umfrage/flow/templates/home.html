@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Flow-Studie – Start{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center g-4">
+    <div class="col-12 col-md-5">
+      <div class="card p-4 h-100">
+        <h2 class="h5 text-info">Teilnahme (Schüler*in)</h2>
+        <p class="mb-3">Starte die anonyme Teilnahme. Du bekommst automatisch eine ID.</p>
+        <a href="/start-user" class="btn btn-primary btn-lg w-100">Ich nehme teil</a>
+      </div>
+    </div>
+    <div class="col-12 col-md-5">
+      <div class="card p-4 h-100">
+        <h2 class="h5 text-info">Admin</h2>
+        <p class="mb-3">Zur Admin-Ansicht (später: Dashboard & Export).</p>
+        <a href="/admin/login" class="btn btn-outline-light btn-lg w-100">Zum Admin-Bereich</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
